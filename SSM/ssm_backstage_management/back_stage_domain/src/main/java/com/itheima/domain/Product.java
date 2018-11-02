@@ -1,5 +1,7 @@
 package com.itheima.domain;
 
+import com.itheima.utils.DateUtils;
+
 import java.util.Date;
 
 public class Product {
@@ -12,6 +14,23 @@ public class Product {
     private double productPrice; // 产品价格
     private String productDesc; // 产品描述
     private Integer productStatus; // 状态 0 关闭 1 开启 private String productStatusStr;
+    private String productStatusStr;
+
+    public String getProductStatusStr() {
+        if (productStatus != null){
+            if (productStatus ==0){
+                productStatusStr="关闭";
+            }
+            if (productStatus==1){
+                productStatusStr="开启";
+            }
+        }
+        return productStatusStr;
+    }
+
+    public void setProductStatusStr(String productStatusStr) {
+        this.productStatusStr = productStatusStr;
+    }
 
     public String getId() {
         return id;
@@ -54,6 +73,11 @@ public class Product {
     }
 
     public String getDepartureTimeStr() {
+
+      if (departureTime != null){
+          String pattern = "yyyy-MM-dd HH:mm:ss";
+          departureTimeStr = DateUtils.dateToString(departureTime,pattern);
+         }
         return departureTimeStr;
     }
 

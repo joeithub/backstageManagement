@@ -20,7 +20,8 @@ public class ProductController {
     public String findAll(Model model){
 
         List<Product> products = productService.findAll();
-        model.addAttribute("",products);
-        return "";
+        model.addAttribute("productList",products);
+        System.out.println(products);
+        return "product-list";
     }
 }

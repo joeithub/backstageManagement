@@ -10,6 +10,20 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>back_stage_domain</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.itheima</groupId>
+            <artifactId>back_stage_utils</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.itheima</groupId>
+            <artifactId>back_stage_utils</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 
 </project>

@@ -22,6 +22,6 @@ public class ProductController {
         List<Product> products = productService.findAll();
         model.addAttribute("productList",products);
         System.out.println(products);
-        return "product-list";
+        return "productList";
     }
 }

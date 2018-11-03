@@ -39,6 +39,22 @@
     <!--配置sqlsessionfactory 一个正真操作数据库的对象-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"></property>
+
+        <!-- 传入PageHelper的分页插件 -->
+        <property name="plugins">
+            <array>
+                <!-- 传入插件的对象 -->
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <props>
+                            <prop key="helperDialect">oracle</prop>
+                            <prop key="reasonable">true</prop>
+                        </props>
+                    </property>
+                </bean>
+            </array>
+        </property>
+
     </bean>
 
     <!--配置spring声明式数据源事务管理器 所以要把数据源参数引入-->

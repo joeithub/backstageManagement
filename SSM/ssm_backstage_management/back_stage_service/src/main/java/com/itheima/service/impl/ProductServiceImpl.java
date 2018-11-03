@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class IProductServiceImpl implements IProductService {
+public class ProductServiceImpl implements IProductService {
 
     @Autowired
     private IProductDao productDao;
@@ -22,5 +22,11 @@ public class IProductServiceImpl implements IProductService {
     @Override
     public void save(Product product) {
         productDao.save(product);
+    }
+
+    @Override
+    public Product findById(String id) {
+
+        return productDao.findById(id);
     }
 }

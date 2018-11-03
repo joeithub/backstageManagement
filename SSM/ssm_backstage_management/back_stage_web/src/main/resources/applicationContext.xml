@@ -46,8 +46,8 @@
         <property name="dataSource" ref="dataSource"></property>
     </bean>
 
-    <!--开启注解扫描支持-->
-    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+ <!--   &lt;!&ndash;开启注解扫描支持&ndash;&gt;
+    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>-->
 
     <!--或者通过配置XML通知-->
     <tx:advice id="txAdvice" transaction-manager="transactionManager">

@@ -14,7 +14,7 @@
     <context:component-scan base-package="com.itheima.controller"></context:component-scan>
     <!--开启视图解析器-->
     <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/pages/"></property>
+        <property name="prefix" value="/pages/"></property>
         <property name="suffix" value=".jsp"></property>
     </bean>
     <!--开启映射器适配器 注解支持-->

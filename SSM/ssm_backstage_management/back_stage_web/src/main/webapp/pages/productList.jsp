@@ -163,7 +163,10 @@
                         <div class="pull-left">
                             <div class="form-group form-inline">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-default" title="新建"><i class="fa fa-file-o"></i> 新建</button>
+                                    <%--不要忘了单引号和双引号的嵌套--%>
+        <button type="button" class="btn btn-default" title="新建"
+          onclick="location.href='/pages/productAdd.jsp'">
+                                        <i class="fa fa-file-o"></i> 新建</button>
                                     <button type="button" class="btn btn-default" title="删除"><i class="fa fa-trash-o"></i> 删除</button>
                                     <button type="button" class="btn btn-default" title="开启"><i class="fa fa-check"></i> 开启</button>
                                     <button type="button" class="btn btn-default" title="屏蔽"><i class="fa fa-ban"></i> 屏蔽</button>

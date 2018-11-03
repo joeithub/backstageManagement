@@ -39,4 +39,14 @@ public class OrderController {
         return "ordersPageList";
     }
 
+
+    /*
+    查询订单详情*/
+    @RequestMapping("/findById.do")
+    public String findById(@RequestParam(value = "id",required = true) String id,Model model){
+       Orders order= orderService.findById(id);
+       model.addAttribute("orders",order);
+        return "orderShow";
+    }
+
 }

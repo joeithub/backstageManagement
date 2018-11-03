@@ -25,4 +25,10 @@ public class OrderServiceImpl implements IOrderService {
         PageHelper.startPage(page,size);
         return orderDao.findAll();
     }
+
+    @Override
+    public Orders findById(String id) {
+        Orders order = orderDao.findById(id);
+        return order;
+    }
 }

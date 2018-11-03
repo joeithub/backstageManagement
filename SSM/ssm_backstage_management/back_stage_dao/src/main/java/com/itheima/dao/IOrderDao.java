@@ -1,11 +1,10 @@
 package com.itheima.dao;
 
+import com.itheima.domain.Member;
 import com.itheima.domain.Orders;
 import com.itheima.domain.Product;
-import org.apache.ibatis.annotations.One;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import com.sun.xml.internal.bind.v2.model.core.ID;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -27,4 +26,15 @@ public interface IOrderDao {
             @Result(property = "product",column = "productId" ,javaType =Product.class ,one=@One(select = "com.itheima.dao.IProductDao.findById")),
     })
     List<Orders> findAll();
+
+
+    /*根据ID查询*/
+    @Select("select * from orders where id = #{id}")
+    @ResultMap("orderMap")
+    @Results({
+            @Result(property = "member", column = "memberId", javaType = Member.class, one = @One(select = "com.itheima.dao.IMemberDao.findById")),
+            @Result(property = "travellers", column = "id",javaType = java.util.List.class,many = @Many(select = "com.itheima.dao.ITravellerDao.findByOrdersId"))
+
+    })
+    Orders findById(String id);
 }

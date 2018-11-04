@@ -46,7 +46,7 @@
    所以都放在resources下，然后指定下路径-->
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:applicationContext.xml</param-value>
+    <param-value>classpath*:applicationContext.xml,classpath*:spring-security.xml</param-value>
   </context-param>
 
 
@@ -66,4 +66,24 @@
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
 
+
+    <!--配置安全框架
+    注意filter-name 必须写为springSecurityFilterChain不能写成其他的不能更改
+    因为它是由DelegatingFilterProxy创建的而springSecurityFilterChain这个名字是唯一能在   ioc中找到它的依据-->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>default.html</welcome-file>
+        <welcome-file>default.htm</welcome-file>
+        <welcome-file>default.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>

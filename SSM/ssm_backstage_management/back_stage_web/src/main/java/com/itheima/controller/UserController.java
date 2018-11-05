@@ -22,4 +22,9 @@ public class UserController {
        model.addAttribute("userList",list);
         return "userList";
     }
+    @RequestMapping("/save.do")
+    public String save(UserInfo userInfo){
+        userService.save(userInfo);
+        return "redirect:findAll.do";
+    }
 }

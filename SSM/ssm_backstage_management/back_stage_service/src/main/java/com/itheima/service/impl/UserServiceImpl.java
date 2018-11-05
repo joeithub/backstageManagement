@@ -40,4 +40,8 @@ public class UserServiceImpl  implements IUserService {
         return list;
     }
 
+    @Override
+    public List<UserInfo> findAll() {
+        return userDao.findAll();
+    }
 }

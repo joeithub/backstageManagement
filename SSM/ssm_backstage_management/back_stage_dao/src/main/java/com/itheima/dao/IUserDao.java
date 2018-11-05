@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 public interface IUserDao {
 
     @Select("select * from users where username =#{username}")
@@ -21,4 +23,7 @@ public interface IUserDao {
 
     })
     public UserInfo findByUsername(String username);
+
+    @Select("select * from users")
+    List<UserInfo> findAll();
 }

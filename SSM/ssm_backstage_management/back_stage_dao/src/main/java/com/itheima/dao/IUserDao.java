@@ -40,4 +40,10 @@ public interface IUserDao {
 
     })
     UserInfo findById(String id);
+
+    @Select("select * from role where id not in (select roleId from users_role where userId = #{userId} )")
+    List<Role> findOtherRoles(String userId);
+
+    @Insert("insert into users_role(userId,roleId) values(#{userId},#{roleId})")
+    void addRoleToUser(@Param("userId") String userId,@Param("roleId")String roleId);
 }

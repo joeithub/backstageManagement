@@ -4,11 +4,13 @@ import com.itheima.domain.Role;
 import com.itheima.domain.UserInfo;
 import com.itheima.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @Controller
@@ -19,12 +21,16 @@ public class UserController {
     private IUserService userService;
 
     @RequestMapping("/findAll.do")
+    @RolesAllowed("USER")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String findAll(Model model){
        List<UserInfo> list= userService.findAll();
        model.addAttribute("userList",list);
         return "userList";
     }
+
     @RequestMapping("/save.do")
+    @PreAuthorize("authentication.principal.username=='tom'")
     public String save(UserInfo userInfo){
         userService.save(userInfo);
         return "redirect:findAll.do";

@@ -3,6 +3,7 @@ package com.itheima.controller;
 import com.itheima.domain.Product;
 import com.itheima.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ public class ProductController {
 
     @Autowired
     private IProductService productService;
-
+    @Secured("ROLE_ADMIN")
     @RequestMapping("/findAll.do")
     public String findAll(Model model){
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -19,11 +20,12 @@ public class RoleController {
     private IRoleService roleService;
 
     @RequestMapping("/findAll.do")
-    public String findAll(Model model){
-
-       List<Role> roleList =roleService.findAll();
-       model.addAttribute("roleList",roleList);
-       return "roleList";
+    public ModelAndView findAll(){
+        ModelAndView modelAndView = new ModelAndView();
+        List<Role> roleList =roleService.findAll();
+        modelAndView.addObject("roleList",roleList);
+        modelAndView.setViewName("roleList");
+       return  modelAndView;
     }
 
     @RequestMapping("/save.do")
@@ -34,14 +36,17 @@ public class RoleController {
 
 
     @RequestMapping("/findRoleByIdAndAllPermission.do")
-    public String findUserAndAllRole(Model model,@RequestParam(name = "id" ,required = true) String roleId){
+    public ModelAndView findUserAndAllRole(@RequestParam(name = "id" ,required = true) String roleId){
+        ModelAndView modelAndView =new ModelAndView();
         // 根据用户ID查询用户
         Role role =roleService.findById(roleId);
         //根据用户ID查询用户可添加的角色
         List<Permission> permissions=roleService.findOtherPermissions(roleId);
-        model.addAttribute("role",role);
-        model.addAttribute("permissionList",permissions);
-        return"rolePermissionAdd";
+        modelAndView.addObject("role",role);
+        modelAndView.addObject("permissionList",permissions);
+        modelAndView.setViewName("rolePermissionAdd");
+
+        return modelAndView;
     }
 
 

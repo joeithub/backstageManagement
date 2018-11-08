@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class OrderController {
     }*/
     /*分页*/
     @RequestMapping("/findAllByPage.do")
-    public String findAllByPage(@RequestParam(value = "page",required = true ,defaultValue = "1")int page, @RequestParam(value = "size",required = true,defaultValue = "5")int size, Model model){
+    public String findAllByPage(@RequestParam(value = "page",required = true ,defaultValue = "1")Integer page, @RequestParam(value = "size",required = true,defaultValue = "5")Integer size, Model model){
         List<Orders> orders = orderService.findAll(page,size);
         model.addAttribute("ordersList",orders);
 
@@ -43,10 +44,12 @@ public class OrderController {
     /*
     查询订单详情*/
     @RequestMapping("/findById.do")
-    public String findById(@RequestParam(value = "id",required = true) String id,Model model){
+    public ModelAndView findById(@RequestParam(value = "id",required = true) String id){
+        ModelAndView modelAndView =new ModelAndView();
        Orders order= orderService.findById(id);
-       model.addAttribute("orders",order);
-        return "orderShow";
+       modelAndView.addObject("orders",order);
+       modelAndView.setViewName("orderShow");
+        return modelAndView;
     }
 
 }

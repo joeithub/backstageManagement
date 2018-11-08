@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -17,10 +18,12 @@ public class permissionController {
     private IPermissionService permissionService;
 
     @RequestMapping("/findAll.do")
-    public String findAll(Model model){
+    public ModelAndView findAll(){
+        ModelAndView modelAndView =new ModelAndView();
        List<Permission>  list = permissionService.findAll();
-       model.addAttribute("permissionList",list);
-       return "permissionList";
+       modelAndView.setViewName("permissionList");
+       modelAndView.addObject("permissionList",list);
+       return modelAndView;
     }
 
     @RequestMapping("/save.do")

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.security.RolesAllowed;
 import java.util.List;
@@ -23,10 +24,12 @@ public class UserController {
     @RequestMapping("/findAll.do")
     @RolesAllowed("USER")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String findAll(Model model){
-       List<UserInfo> list= userService.findAll();
-       model.addAttribute("userList",list);
-        return "userList";
+    public ModelAndView findAll(){
+        ModelAndView modelAndView = new ModelAndView();
+        List<UserInfo> list= userService.findAll();
+        modelAndView.addObject("userList",list);
+        modelAndView.setViewName("userList");
+        return modelAndView;
     }
 
     @RequestMapping("/save.do")
@@ -37,22 +40,26 @@ public class UserController {
     }
 
     @RequestMapping("/findById.do")
-    public String findById(String id,Model model){
+    public ModelAndView findById(String id){
+        ModelAndView modelAndView =new ModelAndView();
      UserInfo userInfo = userService.findById(id);
-     model.addAttribute("user",userInfo);
-     return "userShow";
+     modelAndView.addObject("user",userInfo);
+     modelAndView.setViewName("userShow");
+     return modelAndView;
     }
 
 
     @RequestMapping("/findUserByIdAndAllRole.do")
-    public String findUserAndAllRole(Model model,@RequestParam(name = "id" ,required = true) String userId){
+    public ModelAndView findUserAndAllRole(@RequestParam(name = "id" ,required = true) String userId){
+        ModelAndView modelAndView = new ModelAndView();
         // 根据用户ID查询用户
         UserInfo userInfo = userService.findById(userId);
         //根据用户ID查询用户可添加的角色
        List<Role> roles=userService.findOtherRoles(userId);
-       model.addAttribute("user",userInfo);
-       model.addAttribute("roleList",roles);
-       return"userRoleAdd";
+       modelAndView.addObject("user",userInfo);
+       modelAndView.addObject("roleList",roles);
+       modelAndView.setViewName("userRoleAdd");
+       return modelAndView;
     }
 
     @RequestMapping("/addRoleToUser.do")

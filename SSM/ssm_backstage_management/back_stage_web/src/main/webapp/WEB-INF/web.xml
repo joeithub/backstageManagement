@@ -40,6 +40,10 @@
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
 
+    <!--页面想要获取request需要配置这个监听器-->
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>tener
   <!--监听到有文件加载就触发 初始化applicationContext.xml
    因为applicationContext.xml没放方在webapp下所以指定下目录
    如果放在默认，目录下则不用指定加载，目录（但是不便于统一资源管理）
